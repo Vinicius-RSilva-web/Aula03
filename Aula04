@@ -1,0 +1,30 @@
+import 'package:flutter/material.dart';
+
+void main(){
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    title: "Nome Guia Navegador",
+    home: Container(//colocar elementos 
+      color: Colors.blueAccent.shade100,
+      child: Column(
+        children: <Widget>[
+          ElevatedButton(
+            child: Text("Elavant Button"),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+              side: BorderSide(color:  Colors.white, width: 2),
+              textStyle: const TextStyle(
+                color: Colors.white,
+                fontSize: 25,
+                fontStyle: FontStyle.normal,
+              ),
+            ),
+            onPressed: (){
+              print("Clicou no botão");
+            },
+          )
+        ],
+      ),
+    )
+  ));
+}
