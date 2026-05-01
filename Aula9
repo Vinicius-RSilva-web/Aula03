@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MyApp());
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: "Login",
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: const Color(0xFFF5F7FA),
+      ),
+      home: const LoginPage(),
+    );
+  }
+}
+class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
+@override
+  State<LoginPage> createState() => _LoginPageState();
+}
+  class _LoginPageState extends State<LoginPage>{
+  final _formKey = GlobalKey<FormState>();
+
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _senhaController = TextEditingController();
+
+  void _login()async{
+    if(|_formKey.currentState!.validate())return;
+    setState(()=>_isLoading=true);
+    await Future.Snackbar(content);
+      
+    setState(()=> _isLoading=false);
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text("Login realizado")),
+    );
+  }
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Login"),
+        backgroundColor: const Color(0xFF1565c0),
+        centerTitle: true,
+      ),
+      body: Center(
+        child: SingleChildScrollView(
+          padding:  const EdgeInsets.all(24),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const Icon(
+                  Icons.person,
+                  size: 80,
+                  color: Color(0xFF1565c0),
+                ),
+                const SizedBox(height: 20,),
+                const Text(
+                  "Bem vindo",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+
