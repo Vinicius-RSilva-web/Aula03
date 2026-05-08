@@ -1,0 +1,60 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'TelaCarrinho.dart';
+
+
+
+class TelaCarrinho extends StatelessWidget{
+  final List<Map<String, dynamic>>carrinho;
+
+  const TelaCarrinho((super.key, required this.carrinho));
+
+  double getTotal(){
+    return carrinho.fold(0,(total, item){
+      return total+(item["preco"]*item["quantidade"]);
+    });
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Carrinho"),
+        backgroundColor: Colors.green,
+      ),
+    
+      body: carrinho.isEmpty
+      ?const Center(
+        child: Text("Carrinho vazio"),
+      )
+      :Column(
+        children: [
+          Expanded(
+            child: ListView(
+              children: carrinho.map((item){
+                return ListTile(
+                  leading: Image.asset(
+                    Item["imagen"]
+                    width: 50,
+                  ),
+                  title: Text(item["nome"]),
+                  subtitle: Text("Qdd: ${item["quantidade"]}"),
+                    trailing: Text("Qtd: ${item["quantidade"]).toStringAsFixed()}",,
+                  ),
+                ),
+              }).toList(), 
+            ),
+        ],
+      )
+      padding(Padding(padding: const EdgeInsetsGeometry.all(16),
+      child: Text("Total: R\$ ${getTotal().toStringAsFixed(2)}",
+        style: const TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+        ),
+        ),
+      ),
+      )
+      )
+    )
+  }
+}
