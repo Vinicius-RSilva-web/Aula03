@@ -1,0 +1,86 @@
+import 'package:flutter/material.dart';
+
+class TelaBebidas extends StatefulWidget {
+  const TelaBebidas({super.key});
+
+  @override
+  State<TelaBebidas> createState() => _TelaBebidasState();
+}
+
+class _TelaBebidasState extends State<TelaBebidas> {
+  int? bebidaSelecionada;
+
+  final List<String> bebidas = ["Água", "Refrigerante", "Suco", "Café", "Chá"];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text("Escolha bebida!"),
+        backgroundColor: Colors.blue,
+      ),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(16),
+        itemCount: bebidas.length,
+        itemBuilder: (context, index) {
+          final selecionado = bebidaSelecionada == index;
+          return GestureDetector(
+            onTap: () {
+              setState(() {
+                bebidaSelecionada = index;
+              });
+            },
+            child: Container(
+              margin: const EdgeInsets.only(bottom: 12),
+              padding: const EdgeInsets.all(16),
+              decoration: BoxDecoration(
+                color: selecionado
+                    ? Colors.blue.withOpacity(0.2)
+                    : Colors.grey.shade200,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(
+                  color: selecionado ? Colors.blue : Colors.grey,
+                ),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 24,
+                    height: 24,
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      border: Border.all(color: Colors.blue),
+                    ),
+                    child: selecionado
+                        ? const Center(
+                            child: Icon(
+                              Icons.circle,
+                              size: 12,
+                              color: Colors.blue,
+                            ),
+                          )
+                        : null,
+                  ),
+                  const SizedBox(width: 12),
+                  Text(bebidas[index]),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.blue,
+        child: const Icon(Icons.check),
+        onPressed: () {
+          if (bebidaSelecionada != null) {
+            Navigator.pop(context, bebidas[bebidaSelecionada!]);
+          } else {
+            Navigator.pop(context, "Nenhuma Bebida Selecionada");
+          }
+        },
+      ),
+    );
+  }
+}
+
